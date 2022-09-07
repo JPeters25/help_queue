@@ -4,35 +4,54 @@ import React from 'react';
 import NewTicketForm from './NewTicketForm';
 import TicketList from './TicketList';
 
+
 class TicketControl extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      formVisibleOnPage: false
+      formVisibleOnPage: false,
+      mainTicketList: []
     };
   }
-handleClick = () => {
-	this.setState(prevState => ({
-		formVisibleOnPage: !prevState.formVisibleOnPage
-	}));
+
+  handleAddingNewTicketToList = (newTicket) => {
+    const newMainTicketList = this.state.mainTicketList.concat(newTicket);
+    this.setState({mainTicketList: newMainTicketList,
+                  formVisibleOnPage: false });
+  }
+
+  handleClick = () => {
+	  this.setState(prevState => ({
+		  formVisibleOnPage: !prevState.formVisibleOnPage
+	  }));
 
 }
 
 render(){
 	let currentlyVisibleState = null;
 	let buttonText = null; 
+  const styledButton = {
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: '20px',
+    padding: '10px',
+    borderRadius: '5px',
+    margin: '10px' ,
+    cursor: 'pointer',
+    }
+
 	if (this.state.formVisibleOnPage) {
-		currentlyVisibleState = <NewTicketForm />;
+		currentlyVisibleState = <NewTicketForm onNewTicketCreation={this.handleAddingNewTicketToList} />;
 		buttonText = "Return to Ticket List"; 
 	} else {
-		currentlyVisibleState = <TicketList />;
+		currentlyVisibleState = <TicketList ticketList={this.state.mainTicketList} />;
 		buttonText = "Add Ticket"; 
 	}
 	return (
 		<React.Fragment>
 			{currentlyVisibleState}
-			<button onClick={this.handleClick}>{buttonText}</button> 
+			<button style= {styledButton} onClick={this.handleClick}>{buttonText}</button> 
 		</React.Fragment>
 	);
 }
