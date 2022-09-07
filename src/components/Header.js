@@ -5,7 +5,7 @@ function Header(){
     backgroundColor: '#8128d7',
     color: '#fdfcfe',
     fontFamily: 'sans-serif',
-    paddingTop: '50px',
+    paddingTop: '20px',
     paddingBottom: '20px',
     textAlign: 'center'
   }
