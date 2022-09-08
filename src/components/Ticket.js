@@ -5,8 +5,11 @@ import PropTypes from "prop-types";
 function Ticket(props){
   const ticketSyledComponentStyles = {
     backgroundColor: '#be8d00',
+    marginTop: '15px',
     marginLeft: '50px',
-    marginRight:'50px'
+    marginRight:'50px',
+    borderRadius:'15px',
+    paddingTop: '10px'
   }
 
   return (
